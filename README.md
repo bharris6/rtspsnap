@@ -1,7 +1,6 @@
 # rtspsnap
 
-Take a snapshot of an RTSP steam.
-
+Take a single snapshot of an RTSP steam.
 
 ## Usage
 
