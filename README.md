@@ -4,7 +4,7 @@ Take a single snapshot of an RTSP steam.
 
 ## Usage
 
-Output is a single `jpg`-formatted image whose filename is of the form `YYYYMMDD-hh.mm.ss.jpg`.  
+Output is a single `jpg`-formatted image whose filename is of the form `YYYYMMDDThhmmss.jpg`.  
 
 All times in logs, in image timestamps, and in filenames are in UTC.
 

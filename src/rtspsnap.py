@@ -70,7 +70,7 @@ if __name__ == '__main__':
         camera_capture = cv2.VideoCapture(stream_addr)
         if camera_capture.isOpened():
             ret, frame = camera_capture.read()
-            capture_time = datetime.datetime.utcnow().strftime("%Y%m%d-%H.%M.%S")
+            capture_time = datetime.datetime.utcnow().strftime("%Y%m%dT%H%M%S")
 
             if timeflag:
                 height, width, channels = frame.shape
