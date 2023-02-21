@@ -72,14 +72,15 @@ if __name__ == '__main__':
             ret, frame = camera_capture.read()
             capture_time = datetime.datetime.utcnow().strftime("%Y%m%d-%H.%M.%S")
 
-            height, width, channels = frame.shape
-            cv2.putText(frame, 
-                        f"{capture_time}", 
-                        (0, height-4),
-                        cv2.FONT_HERSHEY_SIMPLEX,
-                        2,
-                        (255,255,255),
-                        3)
+            if timeflag:
+                height, width, channels = frame.shape
+                cv2.putText(frame,
+                            f"{capture_time}",
+                            (0, height-4),
+                            cv2.FONT_HERSHEY_SIMPLEX,
+                            2,
+                            (255,255,255),
+                            3)
 
             #cv2.imshow('frame', frame)
             #cv2.waitKey(0)
