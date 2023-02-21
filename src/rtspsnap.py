@@ -77,7 +77,7 @@ if __name__ == '__main__':
                 cv2.putText(frame,
                             f"{capture_time}",
                             (0, height-4),
-                            cv2.FONT_HERSHEY_SIMPLEX,
+                            cv2.FONT_HERSHEY_PLAIN,
                             2,
                             (255,255,255),
                             3)
