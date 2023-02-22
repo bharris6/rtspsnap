@@ -31,6 +31,28 @@ if __name__ == '__main__':
                         default=tempfile.gettempdir(),
                         help="Directory to store snapshot in.")
 
+    parser.add_argument("--remote-host",
+                        type=str,
+                        required=False,
+                        help="Remote host to transfer snapshot to.")
+    
+    parser.add_argument("--remote-path",
+                        type=str,
+                        required=False,
+                        help="Path on remote machine to put snapshot.")
+
+    parser.add_argument("-u",
+                        "--username",
+                        type=str,
+                        required=False,
+                        help="Username for connection to remote host.")
+
+    parser.add_argument("-k",
+                        "--keyfile-path",
+                        type=str,
+                        required=False,
+                        help="Path to private key file for connection to remote host.")
+
     parser.add_argument("-t",
                         "--timestamp",
                         action="store_true",
@@ -50,7 +72,6 @@ if __name__ == '__main__':
 
     stream_addr = args.stream_address
     auth = args.auth
-
 
     def event_printer(e):
         if args.verbose:
@@ -92,6 +113,18 @@ if __name__ == '__main__':
 
             camera_capture.release()
             #cv2.destroyAllWindows()
+
+            # Check whether we need to copy the snapshot to a remote host
+            if args.remote_host and args.remote_path and args.username:
+                from send_to_remote import send_to_remote
+                event_printer(" - Transferring {} to {}:{}".format(outfile,
+                                                              args.remote_host,
+                                                              args.remote_path))
+                send_to_remote(outfile,
+                               args.remote_host,
+                               args.username,
+                               args.keyfile_path,
+                               args.remote_path)
 
     except Exception as ex:
         print(f"{ex}")
