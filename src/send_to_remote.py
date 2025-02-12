@@ -16,10 +16,12 @@ def send_to_remote(filepath, remote_host, username, key_file=None, remote_path="
         if key_file:
             sshconn.connect(remote_host,
                             username=username,
-                            key_filename=key_file)
+                            key_filename=key_file,
+                            timeout=60.0)
         else:
             sshconn.connect(remote_host,
-                            username=username)
+                            username=username,
+                            timeout=60.0)
 
         with SCPClient(sshconn.get_transport(), socket_timeout=90.0) as scpconn:
             scpconn.put(filepath, remote_path.encode())

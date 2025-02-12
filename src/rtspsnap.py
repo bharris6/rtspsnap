@@ -75,7 +75,7 @@ if __name__ == '__main__':
 
     def event_printer(e):
         if args.verbose:
-            t = datetime.datetime.utcnow()
+            t = datetime.datetime.now(datetime.timezone.utc)
             print("{}: {}".format(t, e))
     
     event_printer("Saving Snapshots To: {}".format(savedir))
@@ -89,10 +89,11 @@ if __name__ == '__main__':
                                                stream_addr)
 
     try:
+        os.environ["OPENCV_FFMPEG_CAPTURE_OPTIONS"] = "rtsp_transport;udp"
         camera_capture = cv2.VideoCapture(stream_addr)
         if camera_capture.isOpened():
             ret, frame = camera_capture.read()
-            capture_time = datetime.datetime.utcnow().strftime("%Y%m%dT%H%M%S")
+            capture_time = datetime.datetime.now(datetime.timezone.utc).strftime("%Y%m%dT%H%M%S")
 
             if timeflag:
                 height, width, channels = frame.shape
@@ -109,7 +110,7 @@ if __name__ == '__main__':
             
             outfile = os.path.join(savedir, f"{capture_time}.jpg")
             event_printer(f" - Writing file to {outfile}")
-            cv2.imwrite(outfile, frame)
+            #cv2.imwrite(outfile, frame)
 
             camera_capture.release()
             #cv2.destroyAllWindows()
