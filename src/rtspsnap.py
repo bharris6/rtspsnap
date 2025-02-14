@@ -110,7 +110,7 @@ if __name__ == '__main__':
             
             outfile = os.path.join(savedir, f"{capture_time}.jpg")
             event_printer(f" - Writing file to {outfile}")
-            #cv2.imwrite(outfile, frame)
+            cv2.imwrite(outfile, frame)
 
             camera_capture.release()
             #cv2.destroyAllWindows()
