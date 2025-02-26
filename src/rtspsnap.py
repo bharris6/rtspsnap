@@ -36,6 +36,11 @@ if __name__ == '__main__':
                         required=False,
                         help="Remote host to transfer snapshot to.")
     
+    parser.add_argument("--remote-port",
+                        type=int,
+                        required=False,
+                        default=22)
+
     parser.add_argument("--remote-path",
                         type=str,
                         required=False,
@@ -124,6 +129,7 @@ if __name__ == '__main__':
                 send_to_remote(outfile,
                                args.remote_host,
                                args.username,
+                               args.remote_port,
                                args.keyfile_path,
                                args.remote_path)
 

@@ -5,7 +5,7 @@ from paramiko import SSHClient, AutoAddPolicy
 from scp import SCPClient
 
 
-def send_to_remote(filepath, remote_host, username, key_file=None, remote_path=".", insecure=True):
+def send_to_remote(filepath, remote_host, username, port=22, key_file=None, remote_path=".", insecure=True):
 
     with SSHClient() as sshconn:
         sshconn.load_system_host_keys()
@@ -15,11 +15,13 @@ def send_to_remote(filepath, remote_host, username, key_file=None, remote_path="
 
         if key_file:
             sshconn.connect(remote_host,
+                            port=port,
                             username=username,
                             key_filename=key_file,
                             timeout=60.0)
         else:
             sshconn.connect(remote_host,
+                            port=port,
                             username=username,
                             timeout=60.0)
 
@@ -56,6 +58,13 @@ if __name__ == '__main__':
                         default=".",
                         help="Path to place file in on remote host.")
 
+    parser.add_argument("-P",
+                        "--port",
+                        type=int,
+                        required=False,
+                        default=22,
+                        help="Port on remote server to connect to.")
+
     parser.add_argument("-u",
                         "--username",
                         type=str,
@@ -70,4 +79,4 @@ if __name__ == '__main__':
 
     args = parser.parse_args()
 
-    send_to_remote(args.file, args.remote_host, args.username, args.key_path, args.remote_path, args.insecure)
+    send_to_remote(args.file, args.remote_host, args.username, args.port, args.port, args.port, args.port, args.port, args.port, args.port, args.port, args.key_path, args.remote_path, args.insecure)
